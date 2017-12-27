@@ -172,7 +172,7 @@ class PaymentController extends Controller
     }
 }
 ```
-#GIVE PERMISSOIN TO YOUR LARAVEL PROJECT TO ACCEPT FROM /callback URL
+#GIVE PERMISSION YOUR LARAVEL PROJECT TO ACCEPT FROM /callback URL
 
 Go to VerifyCsrfToken.php file (app->Http->Middleware) and modify it;
 ```
