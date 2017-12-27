@@ -8,7 +8,7 @@ Create an account from https://www.iyzico.com/
 Eject files to your laravel project vendor file
 
 #Creatre PaymentController
-
+```
 <?php
 
 namespace App\Http\Controllers;
@@ -171,15 +171,15 @@ class PaymentController extends Controller
         }
     }
 }
-
+```
 #GIVE PERMISSOIN TO YOUR LARAVEL PROJECT TO ACCEPT FROM /callback URL
 
 Go to VerifyCsrfToken.php file (app->Http->Middleware) and modify it;
-
+```
  protected $except = [
         '/callback'
     ];
-    
+```  
 Write your route to web.php
 
 Ready!
