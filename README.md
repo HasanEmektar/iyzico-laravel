@@ -7,7 +7,7 @@ Create an account from https://www.iyzico.com/
 
 Eject files to your laravel project vendor file
 
-#Creatre PaymentController
+#Creatre PaymentController and customise it
 ```
 <?php
 
@@ -114,10 +114,10 @@ class PaymentController extends Controller
     {
         IyzipayBootstrap::init();
 
-        $options = new \Iyzipay\Options();
-        $options->setApiKey("sandbox-vm7fzwANvAWm4X33mcBAcDbgomcfL3nN");
-        $options->setSecretKey("sandbox-l3Dd9ra0xhUhidhxkttHvbuVyP4hX1en");
-        $options->setBaseUrl("https://sandbox-api.iyzipay.com");
+        $options = new Options();
+        $options->setApiKey("#YOUR API KEY#");
+        $options->setSecretKey("#YOUR SECRET KEY#");
+        $options->setBaseUrl("https://api.iyzipay.com");
 
         $request1 = request();
         $token = $request1->get('token');
@@ -135,22 +135,22 @@ class PaymentController extends Controller
 
         # print result
 
-        //Yapılan isteğin sonucunu bildirir. Başarılı ise success, hatalı ise failure döner.
+        //It gives the status of operation. Result will be success or failure.
         $status1 = $checkoutForm->getStatus();
 
-        //Ödeme isteğinin durumunu gösterir. Success ise karttan ilgili tutar çekilmiştir.
-        //SUCCESS, FAILURE, INIT_THREEDS, CALLBACK_THREEDS, BKM_POS_SELECTED, CALLBACK_PECCO
+        //It gives the status of payment operation.
+        //Result will be SUCCESS, FAILURE, INIT_THREEDS, CALLBACK_THREEDS, BKM_POS_SELECTED, CALLBACK_PECCO
         $status2 = $checkoutForm->getPaymentStatus();
 
-        //İşlem hatalıysa, bu hataya dair belirtilen mesajdır, locale parametresine göre dil desteği sunar.
+        //If the process has been failed, this will show us error message
         $status3 = $checkoutForm->getErrorMessage();
 
-        //Ödemeye ait id, üye işyeri tarafından mutlaka saklanmalıdır. Ödemenin iptali ve iyzico ile iletişimde kullanılır.
+        //Unic ID value for payment
         $paymentId = $checkoutForm->getPaymentId();
         $iyizicoFee = $checkoutForm->getIyziCommissionFee();
         $iyizico = $checkoutForm->getIyziCommissionRateAmount();
 
-        //Ödemenin taksit bilgisi, tek çekim için 1 döner. Geçerli değerler: 1, 2, 3, 6, 9.
+        //installment information about payment. Current values; 1, 2, 3, 6, 9. You can ask for 12.
         $taksit = $checkoutForm->getInstallment();
 
         if($status1 == "success")
